@@ -5,7 +5,7 @@ import CardContentComponent from "./CardContentComponent/CardContentComponent"
 
 const CardComponent = () => {
   return (
-    <Box sx={{ width: '80%', height: '35rem', border: '3px solid #e4e4e4', margin: 'auto', marginY: '2rem', borderRadius: '10px', padding: '2rem', display: 'flex', flexDirection: "column", }}  >
+    <Box sx={{ width: '85%',  border: '3px solid #e4e4e4', margin: 'auto', marginY: '2rem', borderRadius: '10px', padding: '1rem', display: 'flex', flexDirection: "column", }}  >
       <CardTitlee />
       <Card>
 
@@ -16,7 +16,7 @@ const CardComponent = () => {
           <CardTitlee />
         </CardHeader>
 
-        <CardContent sx={{ backgroundColor: '#f1f1f1', height: '30rem' }}>
+        <CardContent sx={{ backgroundColor: '#f1f1f1'}}>
           <CardContentComponent />
         </CardContent>
       </Card>
