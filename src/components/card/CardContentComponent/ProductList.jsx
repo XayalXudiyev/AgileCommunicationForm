@@ -1,6 +1,9 @@
 import { Box, Button, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography, Card, CardContent, CardHeader } from '@mui/material'
 import React from 'react'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import CardTitle from '../cardTitlee/CardTitlee';
+import { useSelector, useDispatch } from 'react-redux'
+import { setProducts } from '../../../store/productSlice'
 
 const TableHeaderRows = [
     { id: 1, title: 'Məhsul' },
@@ -39,10 +42,23 @@ const unitData = [
 ];
 
 const ProductList = () => {
+
+    const dispatch = useDispatch();
+    const handleInputChange = (e) => {
+        dispatch(setProducts(e.target.value)); // setInputValue action'ını tetikleyerek girilen değeri Redux store'a kaydediyoruz
+    };
+
+    const handleDateChange = (e) => {
+        dispatch(setDate(e.target.value)); // setInputValue action'ını tetikleyerek girilen değeri Redux store'a kaydediyoruz
+    }
+
+
+
+
     return (
         <Box sx={{ width: '85%', border: '3px solid #e4e4e4', margin: 'auto', marginY: '2rem', borderRadius: '10px', padding: '1rem', display: 'flex', flexDirection: "column", }}  >
             <Card>
-
+                <CardTitle />
                 <CardHeader title=""
                     subheader=""
                     avatar={null}
@@ -53,10 +69,10 @@ const ProductList = () => {
                     <Paper sx={{ margin: '.6rem', padding: '2rem' }}>
                         <Box sx={{ bgcolor: '#f1f1f1', padding: '10px', borderRadius: '10px', paddingX: '20px' }}>
 
-                            <Box>
-                                <Typography sx={{ fontWeight: '600', marginBottom: '3px' }}>Məzmun</Typography>
-                                <TextField sx={{ width: '100%', marginBottom: '1rem', backgroundColor: 'white' }} />
-                            </Box>
+                            <TextField
+                                sx={{ width: '100%', marginBottom: '1rem', backgroundColor: 'white' }}
+                                onChange={handleInputChange}
+                            />
 
                             <Box sx={{ display: 'flex', width: '100% ', gap: '20px', }}>
 
@@ -78,7 +94,7 @@ const ProductList = () => {
 
                                 <Box sx={{ width: '100%', marginBottom: '20px' }}>
                                     <Typography sx={{ fontWeight: '600', marginBottom: '3px' }}>Əməliyyat Tarixi</Typography>
-                                    <DatePicker sx={{ width: '100%', backgroundColor: 'white' }} />
+                                    <DatePicker sx={{ width: '100%', backgroundColor: 'white' }} onChange={handleDateChange}/>
                                 </Box>
 
                             </Box>
@@ -102,8 +118,15 @@ const ProductList = () => {
                                         </TableRow>
                                     </TableHead>
 
+
+
+
+
+
                                     <TableBody>
                                         <TableRow>
+
+
                                             <TableCell align="center" sx={{ border: '1px solid #ccc' }}>
                                                 <Select sx={{ width: '6rem', backgroundColor: 'white' }}>
                                                     {productData.map((item, index) => (
@@ -128,6 +151,7 @@ const ProductList = () => {
                                                 </Select>
                                             </TableCell>
 
+
                                             <TableCell align="center" sx={{ border: '1px solid #ccc' }}>
                                                 <TextField type="number" />
                                             </TableCell>
@@ -137,15 +161,15 @@ const ProductList = () => {
                                             </TableCell>
 
                                             <TableCell align="center" sx={{ border: '1px solid #ccc' }}>
-                                                <Button variant="contained" color="primary" sx={{ width: '7rem' }}>Əlavə et</Button>
+                                                <Button variant="contained" sx={{ backgroundColor: '#007bff', width: '7rem' }}>Əlavə et</Button>
                                             </TableCell>
 
                                             <TableCell align="center" sx={{ border: '1px solid #ccc' }}>
-                                                <Button variant="contained" color="primary" sx={{ width: '7rem' }}>Dəyiş</Button>
+                                                <Button variant="contained" sx={{ backgroundColor: '#007bff', width: '7rem' }}>Dəyiş</Button>
                                             </TableCell>
 
                                             <TableCell align="center" sx={{ border: '1px solid #ccc' }}>
-                                                <Button variant="contained" color="primary" sx={{ width: '7rem' }}>Sil</Button>
+                                                <Button variant="contained" sx={{ backgroundColor: '#007bff', width: '7rem' }}>Sil</Button>
                                             </TableCell>
 
                                         </TableRow>
@@ -156,8 +180,8 @@ const ProductList = () => {
 
                         <Typography sx={{ fontWeight: '600', marginTop: '1.7rem', }}>Əməliyyat</Typography>
                         <Box sx={{ display: 'flex', gap: '1rem', backgroundColor: '#f1f1f1', padding: '.7rem', borderRadius: '10px', border: '1px solid #d6d6d6' }}>
-                            <Button variant="contained" color="primary" sx={{ width: '10rem' }}>Yadda saxla</Button>
-                            <Button variant="contained" color="primary" sx={{ width: '10rem' }}>Ləğv et</Button>
+                            <Button variant="contained" sx={{ backgroundColor: '#007bff', width: '10rem' }}>Yadda saxla</Button>
+                            <Button variant="contained" sx={{ backgroundColor: '#007bff', width: '10rem' }}>Ləğv et</Button>
                         </Box>
 
 
