@@ -1,5 +1,3 @@
-// productSlice.js
-
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
@@ -10,9 +8,11 @@ const productSlice = createSlice({
   name: 'products',
   initialState,
   reducers: {
-    addProduct: (state, action) => {
-      state.products.push(action.payload);
-    },
+  addProduct: (state, action) => {  
+
+      state.products.push(action.payload);  
+    }
+    ,
     updateProduct: (state, action) => {
       const index = state.products.findIndex(product => product.id === action.payload.id);
       if (index !== -1) {

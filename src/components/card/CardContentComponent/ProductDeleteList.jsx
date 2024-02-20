@@ -4,6 +4,7 @@ import CardTitle from '../cardTitlee/CardTitlee';
 import ProductList from './ProductList';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
+import { removeContent } from '../../../store/contentSlice';
 const TableHeaderRows = [
     { id: 1, title: 'Məzmun' },
     { id: 2, title: 'Əməliyyat tarixi' },
