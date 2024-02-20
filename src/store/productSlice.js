@@ -1,4 +1,6 @@
-import { configureStore, createSlice } from '@reduxjs/toolkit';
+// productSlice.js
+
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   products: [],

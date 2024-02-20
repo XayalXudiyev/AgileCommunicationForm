@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Button, MenuItem, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { addProduct, updateProduct, deleteProduct } from '../../../store/productSlice'; 
+import { addProduct, updateProduct, deleteProduct } from '../../../store/productSlice';
 
 const ProductListTable = () => {
     const dispatch = useDispatch();
@@ -12,7 +12,7 @@ const ProductListTable = () => {
         type: '',
         unit: '',
         quantity: '',
-        note: '' 
+        note: ''
     });
 
     const handleAddProduct = () => {
@@ -97,23 +97,25 @@ const ProductListTable = () => {
                             </TableCell>
 
                             <TableCell align="center" sx={{ border: '1px solid #ccc' }}>
-                                <TextField sx={{width: '5rem'}} type="number" name="quantity" value={newProductData.quantity} onChange={handleChange} />
+                                <TextField sx={{ width: '5rem' }} type="number" name="quantity"
+                                    value={ newProductData.quantity < 0 ? 0 : newProductData.quantity}
+                                    onChange={handleChange} />
                             </TableCell>
 
                             <TableCell align="center" sx={{ border: '1px solid #ccc' }}>
-                                <TextField sx={{width: '5rem'}}  name="note" value={newProductData.note} onChange={handleChange} />
+                                <TextField sx={{ width: '5rem' }} name="note" value={newProductData.note} onChange={handleChange} />
                             </TableCell>
 
                             <TableCell align="center" sx={{ border: '1px solid #ccc' }}>
-                                <Button variant="contained" sx={{ backgroundColor: '#007bff', width: '7rem' }} onClick={handleAddProduct}>ADD</Button>
+                                <Button variant="contained" sx={{ backgroundColor: '#007bff', width: '7rem' }} onClick={handleAddProduct}>Əlavə et</Button>
                             </TableCell>
 
                             <TableCell align="center" sx={{ border: '1px solid #ccc' }}>
-                                <Button variant="contained" sx={{ backgroundColor: '#007bff', width: '7rem' }}  > UPDATE</Button>
+                                <Button variant="contained" sx={{ backgroundColor: '#007bff', width: '7rem' }}  > Dəyişdir</Button>
                             </TableCell>
 
                             <TableCell align="center" sx={{ border: '1px solid #ccc' }}>
-                                <Button variant="contained" sx={{ backgroundColor: '#007bff', width: '7rem' }} >DELETE</Button>
+                                <Button variant="contained" sx={{ backgroundColor: '#007bff', width: '7rem' }} >Sil</Button>
                             </TableCell>
                         </TableRow>
                     </TableBody>

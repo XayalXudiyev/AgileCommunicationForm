@@ -8,7 +8,7 @@ const contentSlice = createSlice({
         date: '',
         company: '',
         branch: '',
-        dataList: [], // Yeni bir veri listesi eklendi
+        dataList: []
     },
     reducers: {
         setContent: (state, action) => {
@@ -23,36 +23,36 @@ const contentSlice = createSlice({
         setBranch: (state, action) => {
             state.branch = action.payload;
         },
+
         addContent: (state) => {
-            // Yeni bir öğe oluştur ve dataList'e ekle
+            if (state.content === '' || state.date === '' || state.company === '' || state.branch === '') {
+                return alert('Bütün xanaları doldurun!!!');
+            }
+
             const newContent = {
-                id: state.dataList.length + 1, // Yeni id oluştur
+                id: state.dataList.length + 1, 
                 content: state.content,
                 date: dayjs(state.date).format('DD.MM.YYYY'),
                 company: state.company,
                 branch: state.branch,
             };
             state.dataList.push(newContent);
-        
-            // State'i sıfırla
+
             state.content = '';
             state.date = '';
             state.company = '';
             state.branch = '';
         },
-        
+
+
+
         removeContent: (state, action) => {
-            // Silinecek öğenin id'sini al
             const id = action.payload;
-        
-            // Silinecek öğenin index'ini bul
             const index = state.dataList.findIndex((item) => item.id === id);
-        
-            // Bulunan index'teki öğeyi sil
             state.dataList.splice(index, 1);
         }
     },
 });
 
-export const { setContent, setDate, setCompany, setBranch, addContent , removeContent } = contentSlice.actions;
+export const { setContent, setDate, setCompany, setBranch, addContent, removeContent } = contentSlice.actions;
 export default contentSlice.reducer;

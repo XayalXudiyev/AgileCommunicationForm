@@ -1,4 +1,4 @@
-import { Box, Button, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography, Card, CardContent } from '@mui/material';
+import { Box, Button, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography, Card, CardContent, Chip } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import React, { useState } from 'react';
 import CardTitle from '../cardTitlee/CardTitlee';
@@ -35,35 +35,44 @@ const ProductList = () => {
 
     return (
         <Box sx={{ width: '85%', border: '3px solid #e4e4e4', margin: 'auto', marginY: '2rem', borderRadius: '10px', padding: '1rem', display: 'flex', flexDirection: "column" }}>
+            <Typography sx={{ display: 'flex', alignItems: 'end' , marginBottom:'.6rem'}} >
+
+                <Chip label="1" sx={{ fontSize: '1.375rem', color: 'white', fontWeight: '600', backgroundColor: '#28a79e', borderRadius: '5px', }} />
+
+                <Typography component='span' sx={{ fontWeight: '700', marginLeft: '5px', fontSize: '1.125rem' }}>
+                    Məhsul Silinmə (Əlavə et/ Dəyiş)
+                </Typography>
+            </Typography>
+
             <CardTitle />
             <Card>
                 <CardContent sx={{ backgroundColor: '#f1f1f1' }}>
                     <Paper sx={{ margin: '.6rem', padding: '2rem' }}>
                         <TextField sx={{ width: '100%', marginBottom: '1rem', backgroundColor: 'white' }} value={content} onChange={handleContentChange} />
-                        <Box sx={{ display: 'flex', width: '100%', gap: '20px' }}>
-                            <Select value={selectedCompanyOption} onChange={handleCompanyChange} sx={{ width: '100%', backgroundColor: 'white' }} displayEmpty inputProps={{ 'aria-label': 'Without label' }} defaultValue={'Tac'}>
+                        <Box sx={{ display: 'flex', width: '100%', justifyContent: 'space-between' }}>
+                            <Select value={selectedCompanyOption} onChange={handleCompanyChange} sx={{ width: '30%', backgroundColor: 'white' }} displayEmpty inputProps={{ 'aria-label': 'Without label' }} defaultValue={'Tac'}>
                                 <MenuItem value='Tac MMC'>Tac MMC</MenuItem>
                                 <MenuItem value="Mugam MMC">Mugam MMC</MenuItem>
                             </Select>
-                            <Select value={selectedBranchOption} onChange={handleBranchChange} sx={{ width: '100%', backgroundColor: 'white' }} displayEmpty inputProps={{ 'aria-label': 'Without label' }} defaultValue={'Binəqədi filialı'}>
+                            <Select value={selectedBranchOption} onChange={handleBranchChange} sx={{ width: '30%', backgroundColor: 'white' }} displayEmpty inputProps={{ 'aria-label': 'Without label' }} defaultValue={'Binəqədi filialı'}>
                                 <MenuItem value="Binəqədi filialı">Binəqədi Filial</MenuItem>
                                 <MenuItem value='Baş ofis'>Baş ofis</MenuItem>
                             </Select>
                             <DatePicker
                                 value={selectedDate}
                                 onChange={handleDateChange}
-                                renderInput={(params) => <TextField {...params} sx={{ width: '100%', backgroundColor: 'white' }} />}
+                                renderInput={(params) => <TextField {...params} sx={{ width: '30%', backgroundColor: 'white' }} />}
                             />
                         </Box>
 
-                            <ProductListTable  />
+                        <ProductListTable />
 
                         <Typography sx={{ fontWeight: '600', marginTop: '1.7rem' }}>Əməliyyat</Typography>
                         <Box sx={{ display: 'flex', gap: '1rem', backgroundColor: '#f1f1f1', padding: '.7rem', borderRadius: '10px', border: '1px solid #d6d6d6' }}>
                             <Button onClick={handleSave} variant="contained" sx={{ backgroundColor: '#007bff', width: '10rem' }}>Yadda saxla</Button>
                             <Button
-                            onClick={() => window.location.reload()}
-                            variant="contained" sx={{ backgroundColor: '#007bff', width: '10rem' }}>Ləğv et</Button>
+                                onClick={() => window.location.reload()}
+                                variant="contained" sx={{ backgroundColor: '#007bff', width: '10rem' }}>Ləğv et</Button>
                         </Box>
                     </Paper>
                 </CardContent>

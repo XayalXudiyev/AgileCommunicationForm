@@ -7,14 +7,7 @@ const CardTitle = () => {
 
     return (
         <Box>
-            <Typography sx={{ display: 'flex', alignItems: 'end' }} >
-
-                <Chip label="1" sx={{ fontSize: '1.375rem', color: 'white', fontWeight: '600', backgroundColor: '#28a79e', borderRadius: '5px', }} />
-
-                <Typography component='span' sx={{ fontWeight: '700', marginLeft: '5px', fontSize: '1.125rem' }}>
-                    Məhsul Silinmə (Əlavə et/ Dəyiş)
-                </Typography>
-            </Typography>
+            
 
             <Stack direction="row" sx={{ marginTop: '1rem', display: 'flex', alignItems: 'center', justifyContent: "start", gap: '6px' }}>
                 <IconButton aria-label="logo" sx={{ gap: '4px' }}>
