@@ -3,7 +3,7 @@ import Logo from '/Logo.png';
 
 const Header = () => {
     return (
-        <AppBar position='' sx={{ backgroundColor: '#e4e4e4', color: 'black', width: '99%', margin: 'auto', boxShadow: 'none', paddingY: '1rem' }}>
+        <AppBar position='static' sx={{ backgroundColor: '#e4e4e4', color: 'black', width: '99%', margin: 'auto', boxShadow: 'none', paddingY: '1rem' }}>
             <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column' }}>
                 <Stack direction="column" alignItems="center" spacing={0} marginBottom='20px' >
 

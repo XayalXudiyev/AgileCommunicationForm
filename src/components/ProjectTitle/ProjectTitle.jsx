@@ -39,9 +39,7 @@ const ProjectTitle = () => {
           }
         }}
       >
-        <MenuItem value="" disabled>
-          Məhsul Silinmə (Əlavə et/ Dəyiş)
-        </MenuItem>
+    
         <MenuItem value="addEdit">Məhsul Silinmə (Əlavə et/ Dəyiş)</MenuItem>
         <MenuItem value="deleteList">Məhsul Silinmə Siyahısı</MenuItem>
       </Select>

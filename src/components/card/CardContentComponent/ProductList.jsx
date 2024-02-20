@@ -1,195 +1,75 @@
-import { Box, Button, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography, Card, CardContent, CardHeader } from '@mui/material'
-import React from 'react'
+import { Box, Button, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography, Card, CardContent } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import React, { useState } from 'react';
 import CardTitle from '../cardTitlee/CardTitlee';
-import { useSelector, useDispatch } from 'react-redux'
-import { setProducts } from '../../../store/productSlice'
-
-const TableHeaderRows = [
-    { id: 1, title: 'Məhsul' },
-    { id: 2, title: 'Məhsul növü' },
-    { id: 3, title: 'Vahid' },
-    { id: 4, title: 'Miqdar' },
-    { id: 5, title: 'Qeyd' },
-    { id: 6, title: 'Əlavə et' },
-    { id: 7, title: 'Dəyiş' },
-    { id: 8, title: 'Sil' }
-]
-
-const TableRows = [
-    { id: 1, title: 'Çay dəsti' },
-    { id: 2, title: 'Stəkan dəsti' },
-    { id: 3, title: 'Stəkan altlıq' }
-]
-const productData = [
-    { id: 1, name: 'Çay dəsti' },
-    { id: 2, name: 'Stəkan dəsti' },
-    { id: 3, name: 'Stəkan altlıq' },
-];
-
-const productTypeData = [
-    { id: 1, name: 'Hazır məhsul' },
-    { id: 2, name: 'Xammal' },
-    { id: 3, name: 'Mal' },
-];
-
-const unitData = [
-    { id: 1, name: 'kq' },
-    { id: 2, name: 'qram' },
-    { id: 3, name: 'litr' },
-    { id: 4, name: 'sm' },
-    { id: 5, name: 'km' },
-];
+import { useDispatch, useSelector } from 'react-redux';
+import { setContent, setCompany, setBranch, setDate, addContent } from '../../../store/contentSlice';
+import ProductListTable from '../../table/ProductListTable/ProductListTable';
 
 const ProductList = () => {
-
     const dispatch = useDispatch();
-    const handleInputChange = (e) => {
-        dispatch(setProducts(e.target.value)); // setInputValue action'ını tetikleyerek girilen değeri Redux store'a kaydediyoruz
+    const content = useSelector((state) => state.content.content);
+    const selectedCompanyOption = useSelector((state) => state.content.company);
+    const selectedBranchOption = useSelector((state) => state.content.branch);
+    const selectedDate = useSelector((state) => state.content.date);
+
+    const handleContentChange = (e) => {
+        dispatch(setContent(e.target.value));
     };
 
-    const handleDateChange = (e) => {
-        dispatch(setDate(e.target.value)); // setInputValue action'ını tetikleyerek girilen değeri Redux store'a kaydediyoruz
-    }
+    const handleCompanyChange = (e) => {
+        dispatch(setCompany(e.target.value));
+    };
 
+    const handleBranchChange = (e) => {
+        dispatch(setBranch(e.target.value));
+    };
 
+    const handleDateChange = (date) => {
+        dispatch(setDate(date));
+    };
 
+    const handleSave = () => {
+        dispatch(addContent());
+    };
 
     return (
-        <Box sx={{ width: '85%', border: '3px solid #e4e4e4', margin: 'auto', marginY: '2rem', borderRadius: '10px', padding: '1rem', display: 'flex', flexDirection: "column", }}  >
+        <Box sx={{ width: '85%', border: '3px solid #e4e4e4', margin: 'auto', marginY: '2rem', borderRadius: '10px', padding: '1rem', display: 'flex', flexDirection: "column" }}>
+            <CardTitle />
             <Card>
-                <CardTitle />
-                <CardHeader title=""
-                    subheader=""
-                    avatar={null}
-                    action={null}>
-                </CardHeader>
-
                 <CardContent sx={{ backgroundColor: '#f1f1f1' }}>
                     <Paper sx={{ margin: '.6rem', padding: '2rem' }}>
-                        <Box sx={{ bgcolor: '#f1f1f1', padding: '10px', borderRadius: '10px', paddingX: '20px' }}>
-
-                            <TextField
-                                sx={{ width: '100%', marginBottom: '1rem', backgroundColor: 'white' }}
-                                onChange={handleInputChange}
+                        <TextField sx={{ width: '100%', marginBottom: '1rem', backgroundColor: 'white' }} value={content} onChange={handleContentChange} />
+                        <Box sx={{ display: 'flex', width: '100%', gap: '20px' }}>
+                            <Select value={selectedCompanyOption} onChange={handleCompanyChange} sx={{ width: '100%', backgroundColor: 'white' }} displayEmpty inputProps={{ 'aria-label': 'Without label' }} defaultValue={'Tac'}>
+                                <MenuItem value='Tac MMC'>Tac MMC</MenuItem>
+                                <MenuItem value="Mugam MMC">Mugam MMC</MenuItem>
+                            </Select>
+                            <Select value={selectedBranchOption} onChange={handleBranchChange} sx={{ width: '100%', backgroundColor: 'white' }} displayEmpty inputProps={{ 'aria-label': 'Without label' }} defaultValue={'Binəqədi filialı'}>
+                                <MenuItem value="Binəqədi filialı">Binəqədi Filial</MenuItem>
+                                <MenuItem value='Baş ofis'>Baş ofis</MenuItem>
+                            </Select>
+                            <DatePicker
+                                value={selectedDate}
+                                onChange={handleDateChange}
+                                renderInput={(params) => <TextField {...params} sx={{ width: '100%', backgroundColor: 'white' }} />}
                             />
-
-                            <Box sx={{ display: 'flex', width: '100% ', gap: '20px', }}>
-
-                                <Box sx={{ width: '100%', }}>
-                                    <Typography sx={{ fontWeight: '600', marginBottom: '3px' }}>Şirkət</Typography>
-                                    <Select sx={{ width: '100%', backgroundColor: 'white' }} displayEmpty inputProps={{ 'aria-label': 'Without label' }} defaultValue={'TAC'} >
-                                        <MenuItem value='TAC'>Tac MMC   </MenuItem>
-                                        <MenuItem value="">Mugam MMC</MenuItem>
-                                    </Select>
-                                </Box>
-
-                                <Box sx={{ width: '100%', }}>
-                                    <Typography sx={{ fontWeight: '600', marginBottom: '3px' }}>Filial</Typography>
-                                    <Select sx={{ width: '100%', backgroundColor: 'white' }} displayEmpty inputProps={{ 'aria-label': 'Without label' }} defaultValue={'Binəqədi'}    >
-                                        <MenuItem value="Binəqədi">Binəqədi Filial</MenuItem>
-                                        <MenuItem value=''>Baş ofis</MenuItem>
-                                    </Select>
-                                </Box>
-
-                                <Box sx={{ width: '100%', marginBottom: '20px' }}>
-                                    <Typography sx={{ fontWeight: '600', marginBottom: '3px' }}>Əməliyyat Tarixi</Typography>
-                                    <DatePicker sx={{ width: '100%', backgroundColor: 'white' }} onChange={handleDateChange}/>
-                                </Box>
-
-                            </Box>
                         </Box>
 
-                        <Box>
-                            <Typography sx={{ fontWeight: '600', marginTop: '1.7rem', marginBottom: '.4rem' }}>Məhsul Siyahısı</Typography>
-                            <TableContainer >
-                                <Table sx={{ border: '1px solid #ccc', }}>
+                            <ProductListTable  />
 
-                                    <TableHead>
-                                        <TableRow>
-                                            {
-                                                TableHeaderRows.map((item, index) => {
-                                                    return (
-                                                        <TableCell key={index} align="center" sx={{ border: '1px solid #ccc' }}>
-                                                            {item.title}
-                                                        </TableCell>
-                                                    )
-                                                })}
-                                        </TableRow>
-                                    </TableHead>
-
-
-
-
-
-
-                                    <TableBody>
-                                        <TableRow>
-
-
-                                            <TableCell align="center" sx={{ border: '1px solid #ccc' }}>
-                                                <Select sx={{ width: '6rem', backgroundColor: 'white' }}>
-                                                    {productData.map((item, index) => (
-                                                        <MenuItem key={index} value={item.id}>{item.name}</MenuItem>
-                                                    ))}
-                                                </Select>
-                                            </TableCell>
-
-                                            <TableCell align="center" sx={{ border: '1px solid #ccc' }}>
-                                                <Select sx={{ width: '6rem', backgroundColor: 'white' }}>
-                                                    {productTypeData.map((item, index) => (
-                                                        <MenuItem key={index} value={item.id}>{item.name}</MenuItem>
-                                                    ))}
-                                                </Select>
-                                            </TableCell>
-
-                                            <TableCell align="center" sx={{ border: '1px solid #ccc' }}>
-                                                <Select sx={{ width: '6rem', backgroundColor: 'white' }}>
-                                                    {unitData.map((item, index) => (
-                                                        <MenuItem key={index} value={item.id}>{item.name}</MenuItem>
-                                                    ))}
-                                                </Select>
-                                            </TableCell>
-
-
-                                            <TableCell align="center" sx={{ border: '1px solid #ccc' }}>
-                                                <TextField type="number" />
-                                            </TableCell>
-
-                                            <TableCell align="center" sx={{ border: '1px solid #ccc' }}>
-                                                <TextField />
-                                            </TableCell>
-
-                                            <TableCell align="center" sx={{ border: '1px solid #ccc' }}>
-                                                <Button variant="contained" sx={{ backgroundColor: '#007bff', width: '7rem' }}>Əlavə et</Button>
-                                            </TableCell>
-
-                                            <TableCell align="center" sx={{ border: '1px solid #ccc' }}>
-                                                <Button variant="contained" sx={{ backgroundColor: '#007bff', width: '7rem' }}>Dəyiş</Button>
-                                            </TableCell>
-
-                                            <TableCell align="center" sx={{ border: '1px solid #ccc' }}>
-                                                <Button variant="contained" sx={{ backgroundColor: '#007bff', width: '7rem' }}>Sil</Button>
-                                            </TableCell>
-
-                                        </TableRow>
-                                    </TableBody>
-                                </Table>
-                            </TableContainer>
-                        </Box>
-
-                        <Typography sx={{ fontWeight: '600', marginTop: '1.7rem', }}>Əməliyyat</Typography>
+                        <Typography sx={{ fontWeight: '600', marginTop: '1.7rem' }}>Əməliyyat</Typography>
                         <Box sx={{ display: 'flex', gap: '1rem', backgroundColor: '#f1f1f1', padding: '.7rem', borderRadius: '10px', border: '1px solid #d6d6d6' }}>
-                            <Button variant="contained" sx={{ backgroundColor: '#007bff', width: '10rem' }}>Yadda saxla</Button>
-                            <Button variant="contained" sx={{ backgroundColor: '#007bff', width: '10rem' }}>Ləğv et</Button>
+                            <Button onClick={handleSave} variant="contained" sx={{ backgroundColor: '#007bff', width: '10rem' }}>Yadda saxla</Button>
+                            <Button
+                            onClick={() => window.location.reload()}
+                            variant="contained" sx={{ backgroundColor: '#007bff', width: '10rem' }}>Ləğv et</Button>
                         </Box>
-
-
                     </Paper>
                 </CardContent>
             </Card>
         </Box>
-    )
+    );
 }
 
-export default ProductList
+export default ProductList;

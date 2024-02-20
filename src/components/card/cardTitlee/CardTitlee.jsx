@@ -31,8 +31,6 @@ const CardTitle = () => {
                             backgroundColor: '#6c757d',
                         },
                         height: '23px',
-
-
                     }}>Issue Management </Button>
                 <select name="" id="" style={{ height: '20px', borderRadius: '5px', paddingLeft: '3px' }}>
                     <option value="Live Prototype">Live Prototype</option>

@@ -1,10 +1,12 @@
 // store.js
 
 import { configureStore } from '@reduxjs/toolkit';
-import productReducer from './productSlice';
+import contentReducer from './contentSlice';
+import productSlice from './productSlice';
 
 export default configureStore({
     reducer: {
-        products: productReducer,
+        content: contentReducer,
+        products : productSlice
     },
 });

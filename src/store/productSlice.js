@@ -1,28 +1,27 @@
-// productSlice.js
+import { configureStore, createSlice } from '@reduxjs/toolkit';
 
-import { createSlice } from '@reduxjs/toolkit';
+const initialState = {
+  products: [],
+};
 
 const productSlice = createSlice({
-    name: 'products',
-    initialState: {
-        products: '',
-        date: '',
+  name: 'products',
+  initialState,
+  reducers: {
+    addProduct: (state, action) => {
+      state.products.push(action.payload);
     },
-    reducers: {
-        setProducts: (state, action) => {
-            state.products = (action.payload);
-        },
-        setDate : (state, action) => {
-            state.date = (action.payload);
-        },
-        editProduct: (state, action) => {
-            // Burada ürün düzenleme işlemini gerçekleştirin
-        },
-        deleteProduct: (state, action) => {
-            // Burada ürün silme işlemini gerçekleştirin
-        },
+    updateProduct: (state, action) => {
+      const index = state.products.findIndex(product => product.id === action.payload.id);
+      if (index !== -1) {
+        state.products[index] = action.payload;
+      }
     },
+    deleteProduct: (state, action) => {
+      state.products = state.products.filter(product => product.id !== action.payload);
+    },
+  },
 });
 
-export const { setProducts, editProduct, deleteProduct } = productSlice.actions;
+export const { addProduct, updateProduct, deleteProduct } = productSlice.actions;
 export default productSlice.reducer;
